@@ -1,11 +1,8 @@
-import { Building2, Handshake } from "lucide-react";
+import { Handshake } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import CTASection from "@/components/CTASection";
-
-const partners = [
-  "Flipkart", "Amazon", "Myntra", "Zomato", "Swiggy", "Paytm",
-  "PhonePe", "Nykaa", "Meesho", "BigBasket", "Urban Company", "CRED",
-];
+import { PartnerLogo } from "@/components/PartnerLogo";
+import { partners } from "@/data/partners";
 
 const Partners = () => {
   return (
@@ -21,10 +18,10 @@ const Partners = () => {
 
           <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {partners.map((p) => (
-              <Card key={p} className="transition-shadow hover:shadow-md">
+              <Card key={p.name} className="transition-shadow hover:shadow-md">
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <Building2 className="h-8 w-8 text-primary" />
-                  <p className="mt-3 font-semibold text-foreground">{p}</p>
+                  <PartnerLogo {...p} />
+                  <p className="mt-3 text-center font-semibold text-foreground">{p.name}</p>
                 </CardContent>
               </Card>
             ))}
