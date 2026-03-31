@@ -1,12 +1,13 @@
-import { CreditCard, Smartphone, Building2, Wallet, ShieldCheck } from "lucide-react";
+import type { IconType } from "react-icons";
+import { SiContactlesspayment, SiGooglepay, SiHdfcbank, SiPaytm, SiRazorpay } from "react-icons/si";
+import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const methods = [
-  { icon: CreditCard, label: "RuPay Cards" },
-  { icon: Smartphone, label: "UPI Payment" },
-  { icon: Building2, label: "Net Banking" },
-  { icon: Wallet, label: "Digital Wallets" },
-  { icon: ShieldCheck, label: "Secure & Safe" },
+const methods: { label: string; Icon: IconType }[] = [
+  { label: "RuPay Cards", Icon: SiContactlesspayment },
+  { label: "UPI Payment", Icon: SiGooglepay },
+  { label: "Net Banking", Icon: SiHdfcbank },
+  { label: "Digital Wallets", Icon: SiPaytm },
 ];
 
 const PaymentSection = () => {
@@ -23,14 +24,19 @@ const PaymentSection = () => {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-8">
           {methods.map((m) => (
             <div key={m.label} className="flex flex-col items-center gap-2 text-muted-foreground">
-              <m.icon className="h-8 w-8 text-primary" />
+              <m.Icon className="h-10 w-10 text-primary" aria-hidden />
               <span className="text-sm">{m.label}</span>
             </div>
           ))}
+          <div className="flex flex-col items-center gap-2 text-muted-foreground">
+            <ShieldCheck className="h-10 w-10 text-primary" aria-hidden />
+            <span className="text-sm">Secure & Safe</span>
+          </div>
         </div>
 
         <div className="mx-auto mt-12 max-w-md rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
-          <h3 className="text-xl font-bold text-foreground">Pay Securely with Razorpay</h3>
+          <SiRazorpay className="mx-auto h-10 w-10 text-primary" aria-hidden />
+          <h3 className="mt-4 text-xl font-bold text-foreground">Pay Securely with Razorpay</h3>
           <p className="mt-2 text-sm text-muted-foreground">
             Use our secure Razorpay link to make payments for any program
           </p>

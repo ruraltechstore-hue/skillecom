@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-muted/30 to-background">
+    <section className="relative overflow-hidden bg-background">
       {/* Decorative blobs */}
       <div className="pointer-events-none absolute -left-20 top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 bottom-20 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
@@ -19,9 +19,7 @@ const Hero = () => {
           className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         >
           Transform Your Career in{" "}
-          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Digital Marketing
-          </span>
+          <span className="text-primary">Digital Marketing</span>
         </motion.h1>
 
         <motion.p
@@ -46,7 +44,12 @@ const Hero = () => {
               Explore Programs <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-2 border-primary bg-background text-foreground shadow-sm hover:bg-muted"
+          >
             <a href="tel:+919392827075">
               <Zap className="mr-2 h-4 w-4" /> Call Now
             </a>

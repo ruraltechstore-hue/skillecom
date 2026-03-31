@@ -19,9 +19,7 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-const EMAILJS_SERVICE_ID = "service_skillecom";
-const EMAILJS_TEMPLATE_ID = "template_contact";
-const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+const CONTACT_TITLE = "Skillecom contact";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,19 +31,35 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (data: ContactFormValues) => {
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast({
+        title: "Configuration error",
+        description: "Email is not configured. Add VITE_EMAILJS_* variables to your .env file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+    const messageWithPhone = `Phone: ${data.phone}\n\n${data.message}`;
+
     setIsSubmitting(true);
     try {
       await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         {
-          from_name: data.name,
-          from_email: data.email,
-          phone: data.phone,
-          message: data.message,
-          to_email: "etaileddigitalservicespvtltd@gmail.com",
+          name: data.name,
+          email: data.email,
+          message: messageWithPhone,
+          title: CONTACT_TITLE,
+          time,
         },
-        EMAILJS_PUBLIC_KEY
+        publicKey
       );
       toast({ title: "Message sent!", description: "We'll get back to you soon." });
       form.reset();
